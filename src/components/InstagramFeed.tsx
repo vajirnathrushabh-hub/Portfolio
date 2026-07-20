@@ -81,7 +81,7 @@ export default function InstagramFeed() {
     setNewComment('');
   };
 
-  const profilePic = 'https://images.unsplash.com/photo-1614283233556-f35b0c801ef1?auto=format&fit=crop&w=150&h=150&q=80';
+  const profilePic = 'https://raw.githubusercontent.com/vajirnathrushabh-hub/Portfolio/main/src/rushabh.png';
   const realInstaUrl = 'https://www.instagram.com/dad_of_aarav_aarush_/';
 
   return (
