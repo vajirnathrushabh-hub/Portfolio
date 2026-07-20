@@ -45,7 +45,7 @@ export default function About() {
               {/* Main Portrait Image */}
               <div className="rounded-3xl overflow-hidden aspect-[4/5] border border-white/10 shadow-2xl relative bg-brand-card">
                 <img
-                  src="https://images.unsplash.com/photo-1614283233556-f35b0c801ef1?auto=format&fit=crop&w=600&h=750&q=80"
+                  src="https://raw.githubusercontent.com/vajirnathrushabh-hub/Portfolio/main/src/rushabh.png"
                   alt="Rushabh Vajirnath Portrait"
                   className="w-full h-full object-cover object-top filter contrast-[1.05] brightness-95"
                   referrerPolicy="no-referrer"
