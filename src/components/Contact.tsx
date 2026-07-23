@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Message } from '../types';
-import { Mail, MessageCircle, Check, Copy, Send, Smartphone, Inbox, Trash2, Calendar } from 'lucide-react';
+import { Mail, MessageCircle, Check, Copy, Send, Smartphone, Inbox, Trash2, Calendar, Loader2, AlertCircle } from 'lucide-react';
 
 interface ContactProps {
   adminMode: boolean;
   onMessageReceived: () => void;
 }
+
+// ============================================================
+// STEP 1 SETUP (2 minutes, one-time):
+// 1. Go to https://formspree.io and sign up free with aarushgrup17@gmail.com
+// 2. Create a new form -> it gives you a form ID like "xzblqwer"
+// 3. Paste that ID below, replacing "mzdnaony"
+// 4. Formspree will email every submission straight to your inbox.
+// ============================================================
+const FORMSPREE_FORM_ID = 'mzdnaony';
+const FORMSPREE_ENDPOINT = `https://formspree.io/f/${FORMSPREE_FORM_ID}`;
 
 export default function Contact({ adminMode, onMessageReceived }: ContactProps) {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -18,8 +28,10 @@ export default function Contact({ adminMode, onMessageReceived }: ContactProps) 
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
   const [formSuccess, setFormSuccess] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [sendError, setSendError] = useState(false);
 
-  // Load local messages
+  // Load local messages (kept only for the admin demo ledger below)
   useEffect(() => {
     const saved = localStorage.getItem('rushabh_contact_messages');
     if (saved) {
@@ -48,10 +60,13 @@ export default function Contact({ adminMode, onMessageReceived }: ContactProps) 
     }
   };
 
-  // Handle message send
-  const handleSubmitMessage = (e: React.FormEvent) => {
+  // Handle message send — now actually emails you via Formspree
+  const handleSubmitMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !email.trim() || !body.trim()) return;
+
+    setIsSending(true);
+    setSendError(false);
 
     const newMessage: Message = {
       id: `msg_${Date.now()}`,
@@ -68,27 +83,42 @@ export default function Contact({ adminMode, onMessageReceived }: ContactProps) 
       read: false,
     };
 
-    const saved = localStorage.getItem('rushabh_contact_messages');
-    let current: Message[] = [];
-    if (saved) {
-      try {
-        current = JSON.parse(saved);
-      } catch (e) {}
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: newMessage.name,
+          email: newMessage.email,
+          subject: newMessage.subject,
+          message: newMessage.message,
+        }),
+      });
+
+      if (!res.ok) throw new Error('Formspree request failed');
+
+      // Keep a local copy too, so the admin demo ledger below still works
+      const saved = localStorage.getItem('rushabh_contact_messages');
+      let current: Message[] = [];
+      if (saved) {
+        try {
+          current = JSON.parse(saved);
+        } catch (e) {}
+      }
+      saveMessages([newMessage, ...current]);
+
+      setFormSuccess(true);
+      setName('');
+      setEmail('');
+      setSubject('');
+      setBody('');
+      setTimeout(() => setFormSuccess(false), 4000);
+    } catch (err) {
+      setSendError(true);
+      setTimeout(() => setSendError(false), 5000);
+    } finally {
+      setIsSending(false);
     }
-
-    const updated = [newMessage, ...current];
-    saveMessages(updated);
-
-    // Success State animation trigger
-    setFormSuccess(true);
-    setName('');
-    setEmail('');
-    setSubject('');
-    setBody('');
-
-    setTimeout(() => {
-      setFormSuccess(false);
-    }, 4000);
   };
 
   // Administrative: Mark as Read
@@ -211,7 +241,7 @@ export default function Contact({ adminMode, onMessageReceived }: ContactProps) 
 
                   <div className="flex items-center gap-2.5 mt-4">
                     <a
-                      href={`https://wa.me/918767344352?text=Hi%20Rushabh!%20I%20reached%20out%20via%20your%2520portfolio%2520and%2520wanted%252520to%252520discuss%25252520a%25252520new%25252520project.`}
+                      href="https://wa.me/918767344352?text=Hi%20Rushabh!%20I%20reached%20out%20via%20your%20portfolio%20and%20wanted%20to%20discuss%20a%20new%20project."
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-4 py-2 rounded-lg bg-green-500/15 hover:bg-green-500 text-green-400 hover:text-white font-sans text-xs font-bold uppercase tracking-wider transition-all"
@@ -261,9 +291,9 @@ export default function Contact({ adminMode, onMessageReceived }: ContactProps) 
                   <div className="h-16 w-16 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mb-4 border border-green-500/30">
                     <Check className="h-8 w-8 animate-bounce" />
                   </div>
-                  <h3 className="font-display font-bold text-xl text-white">Message Transmitted!</h3>
+                  <h3 className="font-display font-bold text-xl text-white">Message Sent!</h3>
                   <p className="font-sans text-xs text-gray-400 mt-2 max-w-xs">
-                    Your inquiry has been stored. If Sandbox Admin mode is active, toggle the Sandbox Demo in the header to view it instantly in the live ledger!
+                    Thanks for reaching out — it's landed straight in Rushabh's inbox. Expect a reply soon.
                   </p>
                 </div>
               )}
@@ -274,6 +304,13 @@ export default function Contact({ adminMode, onMessageReceived }: ContactProps) 
               <h3 className="text-xl sm:text-2xl font-display font-bold text-white mb-6">
                 Send a Direct Message
               </h3>
+
+              {sendError && (
+                <div className="mb-4 flex items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-xs text-red-300">
+                  <AlertCircle className="h-4 w-4 shrink-0" />
+                  <span>Couldn't send right now — please try again, or email {myEmail} directly.</span>
+                </div>
+              )}
 
               <form onSubmit={handleSubmitMessage} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -334,10 +371,20 @@ export default function Contact({ adminMode, onMessageReceived }: ContactProps) 
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-xl bg-brand-pink text-black hover:bg-white hover:text-black font-sans text-xs font-black uppercase tracking-wider shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  disabled={isSending}
+                  className="w-full py-3.5 rounded-xl bg-brand-pink text-black hover:bg-white hover:text-black font-sans text-xs font-black uppercase tracking-wider shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  <Send className="h-4 w-4" />
-                  <span>Transmit Message</span>
+                  {isSending ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4" />
+                      <span>Send Message</span>
+                    </>
+                  )}
                 </button>
               </form>
             </div>
@@ -351,7 +398,7 @@ export default function Contact({ adminMode, onMessageReceived }: ContactProps) 
             <div className="flex items-center gap-2 mb-6 border-b border-white/5 pb-4">
               <Inbox className="h-5.5 w-5.5 text-brand-pink" />
               <h3 className="font-display font-bold text-lg text-white">
-                Rushabh's Lead Inquiry Ledger <span className="text-xs font-mono font-medium text-brand-pink bg-brand-pink/10 px-2 py-0.5 rounded ml-2">DEMO_INBOX</span>
+                Rushabh's Lead Inquiry Ledger <span className="text-xs font-mono font-medium text-brand-pink bg-brand-pink/10 px-2 py-0.5 rounded ml-2">LOCAL COPY</span>
               </h3>
             </div>
 
@@ -401,7 +448,7 @@ export default function Contact({ adminMode, onMessageReceived }: ContactProps) 
             ) : (
               <div className="text-center py-10 rounded-2xl bg-white/3 border border-white/5">
                 <p className="text-gray-400 text-sm">No client messages received yet.</p>
-                <p className="text-xs text-gray-500 mt-1">Submit a message through the contact form above to watch it arrive in real-time!</p>
+                <p className="text-xs text-gray-500 mt-1">Submit a message through the contact form above to see it logged here — it's also emailed to you directly now.</p>
               </div>
             )}
           </div>
