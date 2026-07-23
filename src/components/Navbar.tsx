@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sparkles, Key, KeyRound } from 'lucide-react';
+import { Menu, X, Sparkles } from 'lucide-react';
 
 interface NavbarProps {
   activeSection: string;
@@ -19,6 +19,19 @@ export default function Navbar({ activeSection, adminMode, setAdminMode, unreadC
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Hidden admin access — press Ctrl+Shift+A anywhere on the site.
+  // No visible button, so regular visitors never see it.
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        setAdminMode(!adminMode);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [adminMode, setAdminMode]);
 
   const navItems = [
     { name: 'About', href: '#about' },
@@ -89,27 +102,8 @@ export default function Navbar({ activeSection, adminMode, setAdminMode, unreadC
             })}
           </div>
 
-          {/* Admin Mode Toggler (Sandbox Mode) */}
+          {/* CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <button
-              id="admin-toggle-btn"
-              onClick={() => setAdminMode(!adminMode)}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase border transition-all duration-300 ${
-                adminMode
-                  ? 'bg-brand-pink text-black border-brand-pink shadow-md shadow-brand-pink/20 font-bold'
-                  : 'bg-brand-dark/60 text-gray-400 border-white/10 hover:border-brand-pink hover:text-brand-pink'
-              }`}
-            >
-              {adminMode ? <KeyRound className="h-3.5 w-3.5" /> : <Key className="h-3.5 w-3.5" />}
-              <span>{adminMode ? 'Sandbox Active' : 'Admin Demo'}</span>
-              {unreadCount > 0 && (
-                <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-                </span>
-              )}
-            </button>
-
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
@@ -121,18 +115,6 @@ export default function Navbar({ activeSection, adminMode, setAdminMode, unreadC
 
           {/* Mobile menu button */}
           <div className="flex md:hidden items-center gap-3">
-            <button
-              onClick={() => setAdminMode(!adminMode)}
-              className={`p-2 rounded-lg border transition-all duration-200 ${
-                adminMode
-                  ? 'bg-brand-pink/20 text-brand-pink border-brand-pink/30'
-                  : 'bg-white/5 text-gray-400 border-white/5'
-              }`}
-              title="Toggle Admin Sandbox Mode"
-            >
-              <Key className="h-5 w-5" />
-            </button>
-
             <button
               id="mobile-menu-toggle"
               onClick={() => setIsOpen(!isOpen)}
@@ -171,17 +153,6 @@ export default function Navbar({ activeSection, adminMode, setAdminMode, unreadC
             );
           })}
           <div className="pt-4 border-t border-white/5 flex flex-col gap-3">
-            <div className="flex items-center justify-between px-4 py-2 rounded-xl bg-white/5">
-              <span className="text-sm font-medium text-gray-300">Admin Sandbox Panel</span>
-              <button
-                onClick={() => setAdminMode(!adminMode)}
-                className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                  adminMode ? 'bg-brand-pink text-black font-bold' : 'bg-gray-700 text-gray-300'
-                }`}
-              >
-                {adminMode ? 'ON' : 'OFF'}
-              </button>
-            </div>
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
