@@ -45,92 +45,64 @@ export const services: Service[] = [
 export const initialProjects: Project[] = [
   {
     id: 'proj1',
-    title: 'Organic Reel Campaign: EcoStyle',
+    title: 'Public Relations & Social Media Management: Mahesh Landge',
     category: 'social',
-    description: 'Crafted a 30-day short-form video strategy focusing on aesthetic product reveals and relatable sustainability humor, triggering viral reach.',
-    image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80',
-    tags: ['Reels Production', 'SMM', 'Organic Growth'],
-    client: 'EcoStyle Apparel',
-    year: '2026',
+    description: 'End-to-end social media and public relations management for an elected representative from Pimpri-Chinchwad — 30-day content calendars, Reels editing and daily uploads, social media analytics, and election campaign execution. Ongoing since 2025 with daily updates across all platforms.',
+    image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=800&q=80',
+    tags: ['SMM', 'Public Relations', 'Reels Production', 'Campaign Management'],
+    client: 'Mahesh Landge',
+    year: '2025 – Present',
+    link: 'https://www.facebook.com/maheshklandge',
     results: [
-      { label: 'Organic Views', value: '1.2 Million' },
-      { label: 'Followers Gained', value: '+14,500' },
-      { label: 'Engagement Rate', value: '11.8%' }
+      { label: 'Facebook Followers', value: '7.5 Lakh' },
+      { label: 'Instagram Followers', value: '8.2 Lakh' },
+      { label: 'Combined Reach', value: '50K+' }
     ]
   },
   {
     id: 'proj2',
-    title: 'Landing Page: Apex Capital Partners',
-    category: 'web',
-    description: 'Designed and engineered a high-performance, responsive single-page website for an investment group, complete with beautiful layout elements and custom lead flows.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-    tags: ['Web Design', 'UI/UX', 'SEO Optimization'],
-    client: 'Apex Capital',
-    year: '2025',
+    title: 'Public Relations & Social Media Management: Kavita Bhongale Patil',
+    category: 'social',
+    description: 'Complete social media and public relations management for a Pimpri-Chinchwad Municipal Corporation Corporator — content calendars, Reels editing, social media analysis, and election campaign execution. Actively managed since 2025 with daily uploads and updates.',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80',
+    tags: ['SMM', 'Public Relations', 'Reels Production', 'Campaign Management'],
+    client: 'Kavita Bhongale Patil',
+    year: '2025 – Present',
+    link: 'https://www.facebook.com/KavitaBhongale',
     results: [
-      { label: 'Conversion Rate', value: '4.85%' },
-      { label: 'Lighthouse Score', value: '99/100' },
-      { label: 'Contact Submissions', value: '+320/Mo' }
+      { label: 'Facebook Followers', value: '20.7K' },
+      { label: 'Instagram Followers', value: '5K' },
+      { label: 'Engagement Rate', value: '12%' }
     ]
   },
   {
     id: 'proj3',
-    title: 'Full Funnel Meta Ads: FitCore Gyms',
-    category: 'marketing',
-    description: 'Designed, launched, and managed targeted lead generation ads across Instagram and Facebook using modern visual layouts and compelling copywriting.',
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80',
-    tags: ['Paid Media', 'Copywriting', 'Lead Generation'],
-    client: 'FitCore Fitness Group',
-    year: '2026',
+    title: 'Website Design & Management: maheshlandge.in',
+    category: 'web',
+    description: 'Designed, built, and have maintained the official website for Mahesh Landge since 2017 — serving as the primary online profile with ongoing updates and upkeep for close to a decade.',
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=800&q=80',
+    tags: ['Web Design', 'Long-term Maintenance', 'Content Updates'],
+    client: 'Mahesh Landge',
+    year: '2017 – Present',
+    link: 'https://www.maheshlandge.in/',
     results: [
-      { label: 'Cost Per Lead', value: '$3.40' },
-      { label: 'Return on Ad Spend', value: '5.2x' },
-      { label: 'New Memberships', value: '+450' }
+      { label: 'Live Since', value: '2017' },
+      { label: 'Status', value: 'Actively Maintained' }
     ]
   },
   {
     id: 'proj4',
-    title: 'Brand Identity & Launch: Bloom Skincare',
-    category: 'social',
-    description: 'Established the visual blueprint, color palettes, tone of voice, and social assets for a D2C beauty brand, culminating in a highly anticipated social media debut.',
-    image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80',
-    tags: ['Branding', 'Content Creation', 'Launch Strategy'],
-    client: 'Bloom Cosmetics',
-    year: '2025',
-    results: [
-      { label: 'Pre-launch List', value: '5,000+' },
-      { label: 'SoldCount Out', value: '48 Hours' },
-      { label: 'UGC Content Created', value: '120+ Clips' }
-    ]
-  },
-  {
-    id: 'proj5',
-    title: 'SaaS Platform Redesign: CloudFlow',
+    title: 'Website Design & Management: MahaEnews',
     category: 'web',
-    description: 'Overhauled the web presence of a project management tool. Structured clean visual hierarchies, smooth scrolling, and simple onboarding widgets.',
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80',
-    tags: ['SaaS Design', 'Web Dev', 'Copywriting'],
-    client: 'CloudFlow Tech',
-    year: '2026',
+    description: 'Designed, built, and manage a bilingual (Marathi & English) news portal, running continuously since 2017 across both language editions.',
+    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80',
+    tags: ['Web Design', 'News Portal', 'Bilingual (Marathi/English)'],
+    client: 'MahaEnews',
+    year: '2017 – Present',
+    link: 'https://mahaenews.com/',
     results: [
-      { label: 'Bounce Rate', value: '-22%' },
-      { label: 'Sign-ups Increase', value: '+38%' },
-      { label: 'Mobile Traffic', value: '65%' }
-    ]
-  },
-  {
-    id: 'proj6',
-    title: 'E-commerce Scale Campaign: VibeGlow',
-    category: 'marketing',
-    description: 'Synergized Google Shopping and Pinterest ads with custom landing pages to clear out seasonal inventory, setting a record-breaking sales quarter.',
-    image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80',
-    tags: ['E-Commerce', 'PPC Ads', 'Pinterest Marketing'],
-    client: 'VibeGlow Wellness',
-    year: '2026',
-    results: [
-      { label: 'Revenue Generated', value: '$84,000' },
-      { label: 'PPC ROAS', value: '4.6x' },
-      { label: 'Repeat Customers', value: '28%' }
+      { label: 'Live Since', value: '2017' },
+      { label: 'Editions', value: 'Marathi + English' }
     ]
   }
 ];
@@ -234,85 +206,6 @@ By partnering with specialized creators, brands can acquire high-quality, authen
     likes: 95,
     comments: [
       { user: 'BrandDirector_X', text: 'UGC is the secret sauce. Our ad cost dropped 40% when we switched from agency models to raw creator videos.', time: '1 month ago' }
-    ]
-  }
-];
-
-export const instagramFeed: InstagramPost[] = [
-  {
-    id: 'ig1',
-    caption: 'Reel 🎬 | Speed-designing a high-converting website layout for a local boutique in React. High-impact fonts, clean grids, and custom micro-interactions. Let me know what you think of this aesthetic! 👇 #WebsiteDesign #ReactJS #TailwindCSS #UIUX #DigitalCreator',
-    image: 'https://images.unsplash.com/photo-1542744094-3a31f103e35f?auto=format&fit=crop&w=600&h=600&q=80',
-    likes: 1240,
-    comments: 48,
-    timestamp: '2 hours ago',
-    type: 'video',
-    commentsList: [
-      { username: 'design_daily', text: 'The typography choice is absolute fire! Love the layout.', time: '1h ago' },
-      { username: 'tech_founder', text: 'Do you design custom SaaS interfaces as well?', time: '30m ago' },
-      { username: 'Rushabh_Creator', text: '@tech_founder Yes I do! Drop a DM or connect via my website for booking.', time: '15m ago' }
-    ]
-  },
-  {
-    id: 'ig2',
-    caption: 'Growth Chart 📈 | Smashed social growth goals for our beauty e-commerce client Bloom Cosmetics this month! Follower base expanded by 14k+ organic, and direct organic shop traffic is up 420%. Strategic reels and aesthetic aesthetics do wonders. DM to scale your brand! 📩 #SocialMediaManager #BrandGrowth #DigitalMarketing #SMM #CreativeCreator',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=600&q=80',
-    likes: 980,
-    comments: 32,
-    timestamp: '1 day ago',
-    type: 'image',
-    commentsList: [
-      { username: 'bloom_skincare', text: 'You completely changed our social presence! Thank you Rushabh!', time: '20h ago' },
-      { username: 'startup_grow', text: 'Insane stats. What was the post frequency?', time: '18h ago' }
-    ]
-  },
-  {
-    id: 'ig3',
-    caption: 'Carousel 🎠 | 5 crucial elements your business website is missing in 2026. Swipe to check why you might be losing potential clients to your competitors. Clue: It is all about page load speed and frictionless WhatsApp links! 💬 #WebDesign #WebsiteStrategy #DigitalMarketer #RushabhVajirnath #BusinessTips',
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=600&h=600&q=80',
-    likes: 1420,
-    comments: 55,
-    timestamp: '3 days ago',
-    type: 'carousel',
-    commentsList: [
-      { username: 'marketing_pro', text: 'Number 3 is so true! WhatsApp button boosted our leads instantly.', time: '2d ago' },
-      { username: 'local_biz_owner', text: 'How do I check my website speed?', time: '1d ago' }
-    ]
-  },
-  {
-    id: 'ig4',
-    caption: 'Workspace 💻 | Sunday workflow session. Planning content calendars for 8 active clients for August. Fuelled by caffeine and creative layouts. Ready to help more brands tell their stories. Let\'s build together! 🚀 #DigitalCreator #SocialMediaManager #WorkspaceInspo #FreelanceLife #ContentStrategy',
-    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&h=600&q=80',
-    likes: 850,
-    comments: 21,
-    timestamp: '5 days ago',
-    type: 'image',
-    commentsList: [
-      { username: 'freelance_community', text: 'The workspace layout is gorgeous! Good luck with the scheduling!', time: '4d ago' }
-    ]
-  },
-  {
-    id: 'ig5',
-    caption: 'Design Accent 🎨 | Color psychology cheat-sheet for brands launching in 2026. Choosing vibrant, high-contrast pairings isn\'t just about aesthetics; it is about steering customer emotions and raising click rates. Save this for your next campaign! 📌 #BrandingTips #GraphicDesign #DigitalMarketing #ColorPsychology #ContentCreation',
-    image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&h=600&q=80',
-    likes: 1120,
-    comments: 39,
-    timestamp: '1 week ago',
-    type: 'image',
-    commentsList: [
-      { username: 'brand_builder', text: 'This cheat-sheet is extremely detailed. Saved!', time: '6d ago' }
-    ]
-  },
-  {
-    id: 'ig6',
-    caption: 'Reel 🎬 | How to setup organic TikTok & IG Reels funnels that run on autopilot. From visual hook to custom DM replies that send leads directly to your booking calendar. Ready to unlock passive client calls? Send a message below! 👇 #Automation #ReelsFunnel #DigitalMarketing #LeadGeneration #SMMExpert',
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&h=600&q=80',
-    likes: 1560,
-    comments: 67,
-    timestamp: '1 week ago',
-    type: 'video',
-    commentsList: [
-      { username: 'consult_david', text: 'Need this funnel setup ASAP. Let\'s get on a call!', time: '1w ago' }
     ]
   }
 ];
